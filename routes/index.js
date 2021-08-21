@@ -121,10 +121,10 @@ router.get('/profile', function (req, res, next) {
 			//console.log("found");
 			if (req.session.access === 'worker') {
 				pageTitle = 'Worker Home';
-				return res.render('data.ejs', { "name": data.username, "email": data.email, 'title': pageTitle });
+				return res.render('worker/data.ejs', { "name": data.username, "email": data.email, 'title': pageTitle });
 			} else {
 				pageTitle = 'Admin Home';
-				return res.render('adminstart.ejs', { "name": data.username, "email": data.email, "date": date, 'title': pageTitle });
+				return res.render('admin/adminstart.ejs', { "name": data.username, "email": data.email, "date": date, 'title': pageTitle });
 			}
 		}
 	});
@@ -178,47 +178,47 @@ router.post('/forgetpass', function (req, res, next) {
 });
 
 
-router.get('/workreport', function (req, res, next) {
-	console.log("Workreport");
-	User.findOne({ unique_id: req.session.userId }, function (err, data) {
-		console.log("data");
-		console.log(data);
-		if (!data) {
-			res.redirect('/');
-		} else {
-			if(req.session.access === 'worker'){
-				pageTitle = 'Employee Workreport';
-				//console.log("found");
-				console.log(date);
-				return res.render('workreport.ejs', { "name": data.username, "date": date, 'title': pageTitle });
-			}else{
-				res.redirect('/profile');
-			}
+// router.get('/workreport', function (req, res, next) {
+// 	console.log("Workreport");
+// 	User.findOne({ unique_id: req.session.userId }, function (err, data) {
+// 		console.log("data");
+// 		console.log(data);
+// 		if (!data) {
+// 			res.redirect('/');
+// 		} else {
+// 			if(req.session.access === 'worker'){
+// 				pageTitle = 'Employee Workreport';
+// 				//console.log("found");
+// 				console.log(date);
+// 				return res.render('workreport.ejs', { "name": data.username, "date": date, 'title': pageTitle });
+// 			}else{
+// 				res.redirect('/profile');
+// 			}
 			
-		}
-	});
-});
+// 		}
+// 	});
+// });
 
-router.get('/addxp', function (req, res, next) {
-	console.log("profile");
-	User.findOne({ unique_id: req.session.userId }, function (err, data) {
-		console.log("data");
-		console.log(data);
+// router.get('/addxp', function (req, res, next) {
+// 	console.log("profile");
+// 	User.findOne({ unique_id: req.session.userId }, function (err, data) {
+// 		console.log("data");
+// 		console.log(data);
 
-		if (!data) {
-			res.redirect('/');
-		} else {
-			//console.log("found");
-			if (req.session.access === 'worker') {
-				pageTitle = 'Worker Home';
-				return res.render('data.ejs', { "name": data.username, "email": data.email, 'title': pageTitle });
-			} else {
-				pageTitle = 'Add XP';
-				return res.render('addxp.ejs', { "name": data.username, "email": data.email, "date": date, 'title': pageTitle });
-			}
-		}
-	});
-});
+// 		if (!data) {
+// 			res.redirect('/');
+// 		} else {
+// 			//console.log("found");
+// 			if (req.session.access === 'worker') {
+// 				pageTitle = 'Worker Home';
+// 				return res.render('data.ejs', { "name": data.username, "email": data.email, 'title': pageTitle });
+// 			} else {
+// 				pageTitle = 'Add XP';
+// 				return res.render('addxp.ejs', { "name": data.username, "email": data.email, "date": date, 'title': pageTitle });
+// 			}
+// 		}
+// 	});
+// });
 
 
 
