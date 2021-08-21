@@ -23,10 +23,9 @@
 				<span id="check"></span>
 			</div>
 			<div>
-				<span>Already Registered! <a href="/login">Login</a></span>
+				<span>Already Registered! <a href="/">Login</a></span>
 			</div>
-			<div id="LangTable"><a href="/login" id="aa"></a>
-			</div>
+			
 		</div>
 		<script type="text/javascript">
 			$(document).ready(function () {
@@ -50,7 +49,7 @@
 								document.getElementById("check").innerHTML = "";
 							}, 3000);
 							if (response.Success == "You are regestered,You can login now.") {
-								document.getElementById("aa").click();
+								document.getElementById("loginaa").click();
 							};
 						},
 						error: function () {
