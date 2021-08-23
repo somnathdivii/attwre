@@ -23,7 +23,7 @@ userSchema = new Schema( {
     	unique:true
 	},
 	password: String,
-	passwordConf: String
+	// passwordConf: String
 }),
 User = mongoose.model('User', userSchema);
 

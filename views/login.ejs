@@ -1,60 +1,51 @@
 <%- include('./partials/header'); -%>
-
-	<body>
-		<div class="col-md-4 col-md-offset-4">
-			<div>
-				<p>Login</p>
-			</div>
-			<div class="form-group">
-				<form id="form" method="post">
-					<input type="text" name="email" placeholder="E-mail" required="" class="form-control"><br />
-					<input type="password" name="password" placeholder="Password" required=""
-						class="form-control"><br />
-					<input type="submit" value="Login" class="btn btn-success">
-				</form>
-			</div>
-			<div class="mssg bg-danger">
-				<span id="check"></span>
-			</div>
-			<div id="LangTable"><a href="/dashboard" id="aa"></a>
-			</div>
-			<div><span>Do you forgot password?</span><a href="/forgetpass">Click here</a>
-				<div><span>Create a new Account?</span><a href="/registration">Register here</a>
-
+			<div class="container-scroller">
+				<div class="container-fluid page-body-wrapper full-page-wrapper">
+				  <div class="content-wrapper d-flex align-items-center auth px-0">
+					<div class="row w-100 mx-0">
+					  <div class="col-lg-4 mx-auto">
+						<div class="auth-form-light text-left py-5 px-4 px-sm-5">
+						  <div class="brand-logo">
+							<img src="./assets/images/logo-dark.svg" alt="logo">
+						  </div>
+						  <h4>Hello! let's get started</h4>
+						  <h6 class="font-weight-light">Sign in to continue.</h6>
+						  <form id="form" class="pt-3" method="post">
+							<div class="form-group">
+							  <input type="email" name="email" required class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username">
+							</div>
+							<div class="form-group">
+							  <input type="password" required name="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+							</div>
+							<div class="mt-3">
+								<input type="submit" value="SIGN IN" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
+							</div>
+							
+							<div class="my-2 d-flex justify-content-between align-items-center">
+							  <div class="form-check">
+								<label class="form-check-label text-muted">
+								  <input type="checkbox" checked class="form-check-input">
+								  Keep me signed in
+								</label>
+							  </div>
+							  <a href="/forgetpass" class="auth-link text-black">Forgot password?</a>
+							</div>
+							<div class="mb-2">
+								<span id="check"></span>
+							</div>
+							<div class="text-center mt-4 font-weight-light">
+							  Don't have an account? <a href="/registration" class="text-primary">Create</a>
+							</div>
+						  </form>
+						  <a href="/" id="loginaa"></a>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				  <!-- content-wrapper ends -->
 				</div>
-
-			</div>
-			<script type="text/javascript">
-				$(document).ready(function () {
-
-					$("#form").submit(function (event) {
-						event.preventDefault();
-
-						$.ajax({
-							type: 'POST',
-							url: '/login',
-							data: $('#form').serialize(),
-							dataType: "json",
-							success: function (response) {
-								//alert("a");
-								//console.log(response.Success);
-								$('#form')[0].reset();
-
-								document.getElementById("check").innerHTML = response.Success;
-								//ADD THIS CODE
-								setTimeout(function () {
-									document.getElementById("check").innerHTML = "";
-								}, 3000);
-								if (response.Success == "Success!") {
-									document.getElementById("aa").click();
-								};
-							},
-							error: function () {
-							}
-						})
-					});
-
-				});
-			</script>
-	</body>
+				<!-- page-body-wrapper ends -->
+			  </div>
+			  <%- include('./partials/scripts'); -%>
+			  <script src="./assets/js/admin/login.js"></script>
 	<%- include('./partials/footer'); -%>

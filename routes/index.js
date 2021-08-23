@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt");
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
@@ -32,17 +33,17 @@ router.get('/', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
 	//console.log(req.body);
-	User.findOne({ email: req.body.email }, function (err, data) {
+	User.findOne({ email: req.body.email }, async (err, data) => {
 		if (data) {
-
-			if (data.password == req.body.password) {
+			const validPassword = await bcrypt.compare(req.body.password, data.password);
+			if (validPassword) {
 				//console.log("Done Login");
 				req.session.userId = data.unique_id;
 				req.session.access = data.access;
 
 				//console.log(req.session.userId);
-				res.redirect('/dashboard');
-				// res.send({ "Success": "Success!" });
+				// res.redirect('/dashboard');
+				res.send({ "Success": "Success!" });
 
 			} else {
 				res.send({ "Success": "Wrong password!" });
@@ -78,7 +79,7 @@ router.post('/registration', function (req, res, next) {
 						if (!data) {
 
 							var c;
-							User.findOne({}, function (err, data) {
+							User.findOne({}, async (err, data) => {
 
 								if (data) {
 									console.log("if");
@@ -92,8 +93,14 @@ router.post('/registration', function (req, res, next) {
 									email: personInfo.email,
 									username: personInfo.username,
 									password: personInfo.password,
-									passwordConf: personInfo.passwordConf
+									// passwordConf: personInfo.passwordConf
 								});
+
+
+								const salt = await bcrypt.genSalt(10);
+
+								newPerson.password = await bcrypt.hash(newPerson.password, salt);
+
 
 								newPerson.save(function (err, Person) {
 									if (err)
@@ -103,7 +110,7 @@ router.post('/registration', function (req, res, next) {
 								});
 
 							}).sort({ _id: -1 }).limit(1);
-							// res.redirect('/');
+
 							res.send({ "Success": "You are regestered,You can login now." });
 						} else {
 							res.send({ "Success": "Username is already used." });
