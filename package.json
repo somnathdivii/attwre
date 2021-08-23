@@ -17,8 +17,8 @@
     "nodemon": "^2.0.12"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js -e js,hbs"
+    "server": "nodemon server.js -e js,hbs"
+    
   },
   "repository": {
     "type": "git",
