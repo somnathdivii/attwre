@@ -3,6 +3,8 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 const Xps = require('../models/xps');
+const Workrt = require('../models/workreport');
+const userApi = require('../apis/userController');
 
 
 const d = new Date();
@@ -53,8 +55,6 @@ router.post('/', function (req, res, next) {
 		}
 	});
 });
-
-
 
 router.get('/registration', function (req, res, next) {
 	pageTitle = 'Employee Registration';
@@ -128,8 +128,6 @@ router.post('/registration', function (req, res, next) {
 	}
 });
 
-
-
 router.get('/dashboard', function (req, res, next) {
 	console.log("dashboard");
 	User.findOne({ unique_id: req.session.userId }, function (err, data) {
@@ -198,6 +196,10 @@ router.post('/forgetpass', function (req, res, next) {
 
 });
 
+router.get('/api', workreport.testData);
+
+
+router.post('/api/user/createworkreport', workreport.createWorkreport);
 
 // router.get('/workreport', function (req, res, next) {
 // 	console.log("Workreport");
@@ -240,9 +242,6 @@ router.post('/forgetpass', function (req, res, next) {
 // 		}
 // 	});
 // });
-
-
-
 
 
 module.exports = router;
